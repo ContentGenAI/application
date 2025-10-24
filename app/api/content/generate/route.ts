@@ -71,6 +71,8 @@ Include a catchy caption and relevant hashtags.`;
     // Extract hashtags from the generated content
     const hashtagRegex = /#\w+/g;
     const hashtags = generatedText.match(hashtagRegex) || [];
+    
+    // Remove hashtags from the main text for cleaner display
     const textWithoutHashtags = generatedText.replace(hashtagRegex, '').trim();
 
     // Create a title from the first 50 characters
