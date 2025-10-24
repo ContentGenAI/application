@@ -10,9 +10,9 @@ export async function apiClient(url: string, options: RequestInit = {}) {
   const token = session?.access_token;
 
   // Merge headers
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...options.headers,
+    ...(options.headers as Record<string, string>),
   };
 
   // Add Authorization header if we have a token
