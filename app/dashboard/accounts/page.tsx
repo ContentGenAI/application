@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { api } from '@/lib/api-client';
@@ -29,7 +29,7 @@ interface SocialAccount {
   updatedAt: string;
 }
 
-export default function AccountsPage() {
+function AccountsContent() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -294,6 +294,20 @@ export default function AccountsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AccountsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <Sparkles className="w-12 h-12 text-purple-600 animate-pulse" />
+        </div>
+      }
+    >
+      <AccountsContent />
+    </Suspense>
   );
 }
 
